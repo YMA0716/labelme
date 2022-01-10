@@ -1,1 +1,40 @@
+安装anaconda
+https://blog.csdn.net/ychgyyn/article/details/82119201
+安装完成之后在spyder中查看python 版本
+conda create --name=labelme python=3.8 //选择python版本，这里是创建单独的一个labelme
+conda activate labelname  //激活labelname
+pip install pyqt5 -i https://pypi.tuna.tsinghua.edu.cn/simple/    //使用清华源下载pyqt5
+pip install labelme
+labelme
+同理 labelImg 如下
+conda create --name=labelImg python=3.8
+conda activate labelImg
+pip install PyQt5 -i https://pypi.tuna.tsinghua.edu.cn/simple/（后面这行是国内的清华镜像源，下载速度才会比较快）
+pip install pyqt5-tools -i https://pypi.tuna.tsinghua.edu.cn/simple/
+pip install lxml -i https://pypi.tuna.tsinghua.edu.cn/simple/
+pip install labelImg -i https://pypi.tuna.tsinghua.edu.cn/simple/ （Img中的I要大写，注意）
+注意安装过程中遇到下图错误，只需要按照错误信息更新pyqt5-tools 版本即可
 
+
+解决xcb的问题
+sudo apt-get install libxcb-xinerama0  //安装lib-xcb库
+分割生成MASK
+下载labelme-master
+labelme-master
+进入example/semantic_segmentation
+将标注图像与对应的json文件放在一个文件夹内，这里放置在example/semantic_segmentation/data_annotated中
+在semantic_segmentation文件夹下的labels.txt中输入，前两行为固定的，后面为你的类别,添加之后保存
+__ignore__
+_background
+steel
+person
+执行下面命令
+python labelme2voc.py data_annotated/ data_dataset_voc --labels labels.txt
+data_annotated 是source文件夹
+data_dataset_voc是create的存储目标文件夹
+注意开始执行前example/semantic_segmentation下是没有data_dataset_voc这个文件夹，否则会报错
+运行结束后在data_dataset_voc中得到四个文件夹以及一个txt----JPEGImages
+----SegmentationClass
+----SegmentationClassPNG
+----SegmentationClassVisualization
+class_names.txt
